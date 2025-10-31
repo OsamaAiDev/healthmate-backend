@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+
 const connectDB = require('./config/db');
 require('dotenv').config();
 
@@ -9,9 +9,7 @@ const app = express();
 connectDB();
 
 // Init Middleware
-app.use(cors({
-  origin: 'https://healthmate-frontend-gules.vercel.app'
-}));
+
 app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.send('API Running'));
