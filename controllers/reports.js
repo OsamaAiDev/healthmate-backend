@@ -84,16 +84,28 @@ exports.summarizeReport = async (req, res) => {
       return res.status(401).json({ msg: 'User not authorized' });
     }
 
+    const fileExtension = report.fileUrl.split('.').pop().toLowerCase();
+    const mimeTypeMap = {
+      jpeg: 'image/jpeg',
+      jpg: 'image/jpeg',
+      png: 'image/png',
+    };
+    const mimeType = mimeTypeMap[fileExtension];
+
+    if (!mimeType) {
+      return res.status(400).json({ msg: 'File type not supported for summarization. Only jpeg and png are supported.' });
+    }
+
     const response = await fetch(report.fileUrl);
     const buffer = await response.buffer();
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const prompt = 'Analyze this medical report and provide a summary in both English and Roman Urdu. Also, suggest relevant questions to ask a doctor, recommend foods to eat and avoid, and list some home remedies. Format the output as a JSON object with the following keys: summary (with nested keys english and romanUrdu), doctorQuestions, foodSuggestions (with nested keys toEat and toAvoid), and homeRemedies.';
 
     const imagePart = {
       inlineData: {
         data: buffer.toString('base64'),
-        mimeType: 'image/jpeg',
+        mimeType: mimeType,
       },
     };
 

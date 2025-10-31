@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'HealthMate',
-    allowed_formats: ['jpeg', 'png', 'jpg', 'pdf'],
+    allowed_formats: ['jpeg', 'png', 'jpg', 'pdf', 'docx', 'doc'],
   },
 });
 
