@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 
 const corsOptions = {
-  origin: 'https://healthmate-frontend-gules.vercel.app',
+  origin: ['https://healthmate-frontend-gules.vercel.app', 'http://localhost:5173'],
   optionsSuccessStatus: 200
 }
 

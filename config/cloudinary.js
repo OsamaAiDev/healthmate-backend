@@ -11,15 +11,9 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: (req, file, cb) => {
-    const fileExtension = file.originalname.split('.').pop().toLowerCase();
-    const isImage = ['jpeg', 'png', 'jpg'].includes(fileExtension);
-    const resource_type = isImage ? 'image' : 'raw';
-    cb(null, {
-      folder: 'HealthMate',
-      allowed_formats: ['jpeg', 'png', 'jpg', 'pdf', 'docx', 'doc', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-      resource_type: resource_type,
-    });
+  params: {
+    folder: 'HealthMate',
+    resource_type: 'auto',
   },
 });
 
