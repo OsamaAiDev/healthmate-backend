@@ -17,7 +17,6 @@ const storage = new CloudinaryStorage({
     const resource_type = isImage ? 'image' : 'raw';
     cb(null, {
       folder: 'HealthMate',
-      allowed_formats: ['jpeg', 'png', 'jpg', 'pdf', 'docx', 'doc'],
       resource_type: resource_type,
     });
   },
