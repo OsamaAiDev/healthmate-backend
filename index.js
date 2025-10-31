@@ -9,7 +9,9 @@ const app = express();
 connectDB();
 
 // Init Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://healthmate-frontend-gules.vercel.app'
+}));
 app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.send('API Running'));
